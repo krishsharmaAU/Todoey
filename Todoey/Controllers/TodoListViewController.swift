@@ -31,9 +31,9 @@ class TodoListViewController: UITableViewController {
         
         
         // Do any additional setup after loading the view, typically from a nib.
-//        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
-//            itemArray = items
-//        }
+        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
+           itemArray = items
+        }
     }
 
     //MARK - Tableview Datasource Method
@@ -83,8 +83,10 @@ class TodoListViewController: UITableViewController {
             let newItem = Item()
             newItem.title = textField.text!
             self.itemArray.append(newItem)
-            //self.defaults.set(self.itemArray, forKey: "TodoListArray")
-            print(self.itemArray)
+            
+            self.defaults.set(self.itemArray, forKey: "TodoListArray")
+        
+            
             self.tableView.reloadData()
         }
         alert.addTextField { (alertTextField) in
